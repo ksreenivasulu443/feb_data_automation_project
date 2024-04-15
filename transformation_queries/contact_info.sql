@@ -1,1 +1,1 @@
-select "Identifier" , "Surname"  from contact_info_raw
+select "Identifier" , "Surname"  from contact_info_raw where Surname='Sreeni'

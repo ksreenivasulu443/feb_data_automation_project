@@ -4,6 +4,7 @@ import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import collect_set
 from utility.read_utility import read_file, read_db
+from utility.validation_lib import count_check, duplicate_check
 
 project_path = os.getcwd()
 
@@ -41,6 +42,7 @@ for row in validations:
     print(row['target_type'])
     print(row['source_db_name'])
     print(row['source_transformation_query_path'])
+    print(row['validation_Type'])
 
     if row['source_type'] == 'table':
         source = read_db(spark=spark,
@@ -67,5 +69,10 @@ for row in validations:
                            spark=spark,
                            schema=row['schema_path'])
 
-    source.show()
-    target.show()
+    for validation in row['validation_Type']:
+        if validation == 'count_check':
+            count_check(source, target)
+        elif validation == 'duplicate_check':
+            duplicate_check(target,row['key_col_list'])
+
+
