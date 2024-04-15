@@ -1,0 +1,1 @@
+select "Identifier" , "Surname"  from contact_info_raw

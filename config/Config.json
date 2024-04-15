@@ -1,0 +1,39 @@
+{
+  "oracle_db_dev": {
+    "url": "jdbc:oracle:thin:@//localhost:1521/ORCL",
+    "user": "system",
+    "password": "Dharmavaram1@",
+    "driver": "oracle.jdbc.driver.OracleDriver"
+
+  },
+  "oracle_db_test": {
+    "url": "jdbc:oracle:thin:@//localhost:1521/ORCL",
+    "user": "system",
+    "password": "Dharmavaram1@",
+    "driver": "oracle.jdbc.driver.OracleDriver"
+
+  },
+  "oracle_db_prod": {
+    "url": "jdbc:oracle:thin:@//localhost:1521/ORCL",
+    "user": "system",
+    "password": "Dharmavaram1@",
+    "driver": "oracle.jdbc.driver.OracleDriver"
+
+  },
+  "postgres_db": {
+    "url": "jdbc:postgresql://localhost:5432/postgres",
+    "user": "postgres",
+    "password": "Dharmavaram1@",
+    "driver": "org.postgresql.Driver"
+
+  },
+  "sqlserver_db": {
+    "url": "jdbc:sqlserver://localhost:5432/postgres",
+    "user": "sqlserver",
+    "password": "Dharmavaram1@",
+    "driver": "sqlserver.driver"
+
+  }
+}
+
+
