@@ -1,3 +1,1 @@
 ,validation_Type,Source_name,target_name,Number_of_source_Records,Number_of_target_Records,Number_of_failed_Records,column,Status,source_type,target_type
-0,records_present_only_in_source,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info.csv,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info_t.csv,10,12,1,"IDENTIFIER,Surname",FAIL,csv,csv
-1,records_present_only_target,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info.csv,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info_t.csv,10,12,1,"IDENTIFIER,Surname",FAIL,csv,csv

@@ -4,12 +4,13 @@ import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import collect_set
 from utility.read_utility import read_file, read_db
-from utility.validation_lib import count_check, duplicate_check, uniqueness_check, records_present_only_in_source
+from utility.validation_lib import count_check, duplicate_check, uniqueness_check, records_present_only_in_source, \
+    null_value_check, data_compare
 
 project_path = os.getcwd()
 
 jar_path = project_path + "/jars/postgresql-42.2.5.jar"
-spark = SparkSession.builder.master("local[2]") \
+spark = SparkSession.builder.master("local[1]") \
     .appName("test") \
     .config("spark.jars", jar_path) \
     .config("spark.driver.extraClassPath", jar_path) \
@@ -51,12 +52,6 @@ validation.show(truncate=False)
 validations = validation.collect()
 
 for row in validations:
-    print(row['source'])
-    print(row['target'])
-    print(row['target_type'])
-    print(row['source_db_name'])
-    print(row['source_transformation_query_path'])
-    print(row['validation_Type'])
 
     if row['source_type'] == 'table':
         source = read_db(spark=spark,
@@ -94,7 +89,10 @@ for row in validations:
             records_present_only_in_source(source, target,row['key_col_list'], Out, row, validation)
         elif validation == 'records_present_only_target':
             records_present_only_in_source(source, target,row['key_col_list'], Out, row, validation)
-
+        elif validation == 'null_value_check':
+            null_value_check(target, row['null_col_list'], Out, row, validation)
+        elif validation =='data_compare':
+            data_compare(source, target, row['key_col_list'], Out,row, validation)
 
 
 print(Out)
