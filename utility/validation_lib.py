@@ -154,6 +154,7 @@ def null_value_check(target, Null_columns, Out, row, validation):
                          target_type=row['target_type'], Out=Out)
 
 def data_compare(source, target, keycolumn,Out,row, validation):
+    columns = keycolumn
     keycolumn = keycolumn.split(",")
 
     keycolumn = [i.lower() for i in keycolumn]
@@ -161,9 +162,27 @@ def data_compare(source, target, keycolumn,Out,row, validation):
     columnList = source.columns
     print(columnList)
     smt = source.exceptAll(target).withColumn("datafrom", lit("source")) #1 billion - 1M(mimatch)
-    tms = target.exceptAll(source).withColumn("datafrom", lit("target")) #1 billion - 500K(mismathc)
-    failed = smt.union(tms) #- 1.5 M( failed)
+    tms = target.exceptAll(source).withColumn("datafrom", lit("target")) #1 billion - 500K(mismathch)
+    failed = smt.union(tms) #- 1.5 M( failed) - (id, name)- 1.5M - abcd
     failed2 = failed.select(keycolumn).distinct().withColumn("hash_key", sha2(concat(*[col(c) for c in keycolumn]), 256))
+    print("faile2 records are ")
+    failed2.show()
+    failed_count = failed.count()
+    target_count = target.count()
+    source_count= source.count()
+    if failed_count > 0:
+        write_output(validation_Type=validation, source=row['source'], target=row['target'],
+                     Number_of_source_Records=source_count, Number_of_target_Records=target_count,
+                     Number_of_failed_Records=failed_count, column=columns, Status='FAIL',
+                     source_type=row['source_type'],
+                     target_type=row['target_type'], Out=Out)
+    else:
+        write_output(validation_Type=validation, source=row['source'], target=row['target'],
+                     Number_of_source_Records=source_count, Number_of_target_Records=target_count,
+                     Number_of_failed_Records=0, column=columns, Status='PASS',
+                     source_type=row['source_type'],
+                     target_type=row['target_type'], Out=Out)
+
     source = source.withColumn("hash_key", sha2(concat(*[col(c) for c in keycolumn]), 256)).join(failed2,["hash_key"], how='left_semi').drop('hash_key')
     target = target.withColumn("hash_key", sha2(concat(*[col(c) for c in keycolumn]), 256)).join(failed2, ["hash_key"],
                                                                                                  how='left_semi').drop('hash_key')
@@ -181,8 +200,34 @@ def data_compare(source, target, keycolumn,Out,row, validation):
                 keycolumn.remove(column)
                 temp_join = temp_source.join(temp_target, keycolumn, how='full_outer')
                 temp_join.withColumn("comparison", when(col('source_' + column) == col("target_" + column),
-                                                        "True").otherwise("False")).filter("comparison == False").show()
+                                                        "True").otherwise("False")).filter(f"comparison == False and source_{column} is not null and target_{column} is not null").show()
 
+def schema_check(source, target, spark,row, Out, validation):
+    source.createOrReplaceTempView("source")
+    target.createOrReplaceTempView("target")
+    source_schema= spark.sql("describe source")
+    source_schema.createOrReplaceTempView("source_schema")
+    target_schema= spark.sql("describe target")
+    target_schema.createOrReplaceTempView("target_schema")
+
+    failed = spark.sql('''select a.col_name source_col_name,b.col_name target_col_name, a.data_type as source_data_type, b.data_type as target_data_type, 
+    case when a.data_type=b.data_type then "pass" else "fail" end status
+    from source_schema a full join target_schema b on a.col_name=b.col_name''').filter(" status = 'fail' ")
+    source_count = source_schema.count()
+    target_count= target_schema.count()
+    failed_count =failed.count()
+    if failed_count > 0:
+        write_output(validation_Type=validation, source=row['source'], target=row['target'],
+                     Number_of_source_Records=source_count, Number_of_target_Records=target_count,
+                     Number_of_failed_Records=failed_count, column="NOT APP", Status='FAIL',
+                     source_type=row['source_type'],
+                     target_type=row['target_type'], Out=Out)
+    else:
+        write_output(validation_Type=validation, source=row['source'], target=row['target'],
+                     Number_of_source_Records=source_count, Number_of_target_Records=target_count,
+                     Number_of_failed_Records=0, column="NOT APP", Status='PASS',
+                     source_type=row['source_type'],
+                     target_type=row['target_type'], Out=Out)
 
 
 def write_output(validation_Type, source, target, Number_of_source_Records, Number_of_target_Records,
