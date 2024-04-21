@@ -5,8 +5,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import collect_set
 from utility.read_utility import read_file, read_db
 from utility.validation_lib import count_check, duplicate_check, uniqueness_check, records_present_only_in_source, \
-    null_value_check, data_compare
-from test import *
+    null_value_check, data_compare,name_check,column_range_check,column_value_reference_check
 
 project_path = os.getcwd()
 
@@ -94,11 +93,11 @@ for row in validations:
         elif validation == 'data_compare':
             data_compare(source, target, row['key_col_list'], Out, row, validation)
         elif validation == 'name_check':
-            name_check(target,row['dq_column'])
+            name_check(target,row['dq_column'],Out, row, validation,)
         elif validation == 'column_range_check':
-            column_range_check(target,row['dq_column'],row['min_val'],row['max_val'])
+            column_range_check(target,row['dq_column'],row['min_val'],row['max_val'],validation, row, Out)
         elif validation == 'column_value_reference_check':
-            column_value_reference_check(target,row['dq_column'],row['expected_values'])
+            column_value_reference_check(target,row['dq_column'],row['expected_values'],Out, row, validation)
 
 print(Out)
 

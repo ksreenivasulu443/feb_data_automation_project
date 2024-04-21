@@ -1,2 +1,5 @@
 ,validation_Type,Source_name,target_name,Number_of_source_Records,Number_of_target_Records,Number_of_failed_Records,column,Status,source_type,target_type
-0,data_compare,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info.csv,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info_t.csv,12,12,6,"IDENTIFIER,Surname",FAIL,csv,csv
+0,column_range_check,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info.csv,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info_t.csv,NOT APPL,12,8,Identifier,FAIL,NOT APPL,csv
+1,name_check,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info.csv,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info_t.csv,NOT APPL,12,12,Identifier,FAIL,NOT APPL,csv
+2,column_value_reference_check,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info.csv,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info_t.csv,NOT APPL,12,7,Identifier,FAIL,NOT APPL,csv
+3,data_compare,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info.csv,C:\Users\A4952\PycharmProjects\Data_Automation_project\source_files\Contact_info_t.csv,12,12,6,"IDENTIFIER,Surname",FAIL,csv,csv
