@@ -50,7 +50,6 @@ def read_db(spark: SparkSession,
         with open(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\config\Config.json") as f:
             config_data = json.load(f)[database]
             print(config_data)
-
         if query != 'NOT APPL':
             with open(query, "r") as file:
                 sql_query = file.read()
@@ -80,5 +79,44 @@ def read_db(spark: SparkSession,
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
+
+def read_snowflake(spark: SparkSession,
+            table: str,
+            database: str,
+            query: str):
+    try:
+        with open(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\config\Config.json") as f:
+            config_data = json.load(f)[database]
+            print(config_data)
+        if query != 'NOT APPL':
+            with open(query, "r") as file:
+                sql_query = file.read()
+            print(sql_query)
+            print(config_data)
+            df = spark.read \
+                .format("jdbc") \
+                .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
+                .option("url", config_data['jdbc_url']) \
+                .option("query", sql_query) \
+                .load()
+        else:
+            df = spark.read \
+                .format("jdbc") \
+                .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
+                .option("url", config_data['jdbc_url']) \
+                .option("query", table) \
+                .load()
+
+        return df
+    except FileNotFoundError as e:
+        print(f"File not found: {e.filename}")
+        return None
+    except KeyError as e:
+        print(f"Key error: {e}")
+        return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
 
 

@@ -1,25 +1,5 @@
 {
-  "oracle_db_dev": {
-    "url": "jdbc:oracle:thin:@//localhost:1521/ORCL",
-    "user": "system",
-    "password": "Dharmavaram1@",
-    "driver": "oracle.jdbc.driver.OracleDriver"
 
-  },
-  "oracle_db_test": {
-    "url": "jdbc:oracle:thin:@//localhost:1521/ORCL",
-    "user": "system",
-    "password": "Dharmavaram1@",
-    "driver": "oracle.jdbc.driver.OracleDriver"
-
-  },
-  "oracle_db_prod": {
-    "url": "jdbc:oracle:thin:@//localhost:1521/ORCL",
-    "user": "system",
-    "password": "Dharmavaram1@",
-    "driver": "oracle.jdbc.driver.OracleDriver"
-
-  },
   "postgres_db": {
     "url": "jdbc:postgresql://localhost:5432/postgres",
     "user": "postgres",
@@ -27,11 +7,9 @@
     "driver": "org.postgresql.Driver"
 
   },
-  "sqlserver_db": {
-    "url": "jdbc:sqlserver://localhost:5432/postgres",
-    "user": "sqlserver",
-    "password": "Dharmavaram1@",
-    "driver": "sqlserver.driver"
+  "snowflake_db": {
+    "jdbc_url" : "jdbc:snowflake://wbaiyzo-as58233.snowflakecomputing.com/?user=KATSREEN100&password=Dharmavaram1@&warehouse=COMPUTE_WH&db=ETL_AUTO&schema=CONTACT_INFO",
+    "driver": "net.snowflake.client.jdbc.SnowflakeDriver"
 
   }
 }
