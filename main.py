@@ -5,7 +5,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import collect_set
 from utility.read_utility import read_file, read_db
 from utility.validation_lib import count_check, duplicate_check, uniqueness_check, records_present_only_in_source, \
-    null_value_check, data_compare,name_check,column_range_check,column_value_reference_check
+    null_value_check, data_compare, name_check, column_range_check, column_value_reference_check, schema_check
 
 project_path = os.getcwd()
 
@@ -39,45 +39,51 @@ run_test_case = test_cases.loc[(test_cases.execution_ind == 'Y')]
 run_test_case = spark.createDataFrame(run_test_case)
 
 validation = (run_test_case.groupBy('source', 'source_type',
-                                    'source_db_name', 'schema_path', 'source_transformation_query_path',
-                                    'target', 'target_type', 'target_db_name',
+                                    'source_db_name', 'source_schema_path', 'source_transformation_query_path',
+                                    'target', 'target_type', 'target_db_name','target_schema_path',
                                     'target_transformation_query_path',
-                                    'key_col_list', 'null_col_list',
+                                    'key_col_list', 'null_col_list','exclude_columns',
                                     'unique_col_list','dq_column','expected_values','min_val','max_val').
               agg(collect_set('validation_Type').alias('validation_Type')))
 
 validation.show(truncate=False)
 
 validations = validation.collect()
-
+print("*"*50)
+print(f"Execution has started")
+print("*"*50)
 for row in validations:
-
     if row['source_type'] == 'table':
         source = read_db(spark=spark,
                          table=row['source'],
                          database=row['source_db_name'],
-                         query=row['source_transformation_query_path'])
+                         query=row['source_transformation_query_path'],row=row)
 
     else:
-        print("schema", row['schema_path'])
         source = read_file(type=row['source_type'],
                            path=row['source'],
                            spark=spark,
-                           schema=row['schema_path'])
+                           row=row,
+                           schema=row['source_schema_path'])
 
     if row['target_type'] == 'table':
         target = read_db(spark=spark,
                          table=row['target'],
                          database=row['target_db_name'],
-                         query=row['target_transformation_query_path'])
+                         query=row['target_transformation_query_path'],row=row)
 
     else:
         target = read_file(type=row['target_type'],
                            path=row['target'],
+                           row=row,
                            spark=spark,
-                           schema=row['schema_path'])
+                           schema=row['target_schema_path'])
+
+    source_count = source.count()
+    target_count = target.count()
 
     for validation in row['validation_Type']:
+        validation = validation.lower()
         if validation == 'count_check':
             count_check(source, target, Out, row, validation)
         elif validation == 'duplicate_check':
@@ -98,7 +104,8 @@ for row in validations:
             column_range_check(target,row['dq_column'],row['min_val'],row['max_val'],validation, row, Out)
         elif validation == 'column_value_reference_check':
             column_value_reference_check(target,row['dq_column'],row['expected_values'],Out, row, validation)
-
+        elif validation == 'schema_check':
+            schema_check(source,target,spark,Out, row, validation)
 print(Out)
 
 summary = pd.DataFrame(Out)

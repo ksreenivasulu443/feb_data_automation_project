@@ -6,8 +6,10 @@ from utility.general_utility import flatten
 def read_file(type: str,
               path: str,
               spark: SparkSession,
+              row,
               schema: str = 'NOT APPL',
-              multiline: bool = True):
+              multiline: bool = True,
+              ):
     try:
         type = type.lower()
         if type == 'csv':
@@ -33,8 +35,10 @@ def read_file(type: str,
             pass
         else:
             raise ValueError("Unsupported file format", type)
-        return df
-
+        words = row['exclude_columns'].split(',')
+        exclude_cols = ",".join(words)
+        #return df.drop('batch_date','create_date','update_date','create_user','update_user')
+        return df.drop(exclude_cols)
     except FileNotFoundError as e:
         df = None
 
@@ -45,7 +49,8 @@ def read_file(type: str,
 def read_db(spark: SparkSession,
             table: str,
             database: str,
-            query: str):
+            query: str,
+            row):
     try:
         with open(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\config\Config.json") as f:
             config_data = json.load(f)[database]
@@ -69,7 +74,8 @@ def read_db(spark: SparkSession,
                 option("dbtable", table). \
                 option("driver", config_data['driver']).load()
 
-        return df
+        return df.drop('batch_date','create_date','update_date','create_user','update_user')
+
     except FileNotFoundError as e:
         print(f"File not found: {e.filename}")
         return None
@@ -107,7 +113,7 @@ def read_snowflake(spark: SparkSession,
                 .option("query", table) \
                 .load()
 
-        return df
+        return  df.drop('batch_date','create_date','update_date','create_user','update_user')
     except FileNotFoundError as e:
         print(f"File not found: {e.filename}")
         return None

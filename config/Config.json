@@ -7,9 +7,20 @@
     "driver": "org.postgresql.Driver"
 
   },
+    "postgres_db_dev": {
+    "url": "jdbc:postgresql://localhost:5432/postgres",
+    "user": "postgres",
+    "password": "Dharmavaram1@",
+    "driver": "org.postgresql.Driver"
+
+  },
   "snowflake_db": {
     "jdbc_url" : "jdbc:snowflake://wbaiyzo-as58233.snowflakecomputing.com/?user=KATSREEN100&password=Dharmavaram1@&warehouse=COMPUTE_WH&db=ETL_AUTO&schema=CONTACT_INFO",
     "driver": "net.snowflake.client.jdbc.SnowflakeDriver"
+
+  },
+   "adls": {
+     "connection":" \"snowflake_db\": {\n    \"jdbc_url\" : \"jdbc:snowflake://wbaiyzo-as58233.snowflakecomputing.com/?user=KATSREEN100&password=Dharmavaram1@&warehouse=COMPUTE_WH&db=ETL_AUTO&schema=CONTACT_INFO\",\n    \"driver\": \"net.snowflake.client.jdbc.SnowflakeDriver\"\n\n  }"
 
   }
 }
