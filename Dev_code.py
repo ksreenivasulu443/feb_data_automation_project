@@ -149,11 +149,11 @@ contact_info_silver.write.mode("overwrite") \
     .save()
 
 
-#load data to snowflake
-
-contact_info_silver.write \
-                .mode("overwrite") \
-                .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
-                .option("url", "jdbc:snowflake://wbaiyzo-as58233.snowflakecomputing.com/?user=KATSREEN100&password=Dharmavaram1@&warehouse=COMPUTE_WH&db=ETL_AUTO&schema=CONTACT_INFO") \
-                .option("dbtable", "contact_info_silver") \
-                .save()
+# #load data to snowflake
+#
+# contact_info_silver.write \
+#                 .mode("overwrite") \
+#                 .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
+#                 .option("url", "jdbc:snowflake://wbaiyzo-as58233.snowflakecomputing.com/?user=KATSREEN100&password=Dharmavaram1@&warehouse=COMPUTE_WH&db=ETL_AUTO&schema=CONTACT_INFO") \
+#                 .option("dbtable", "contact_info_silver") \
+#                 .save()
