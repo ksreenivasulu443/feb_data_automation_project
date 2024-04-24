@@ -6,19 +6,18 @@ import pandas as pd
 from pyspark.sql.functions import explode_outer, concat, col, \
     trim,to_date, lpad, lit, count,max, min, explode, current_timestamp
 from pyspark.sql import SparkSession
+import getpass
 os.environ.setdefault("project_path", os.getcwd())
 project_path = os.environ.get("project_path")
-import getpass
 
-# Fetch system user's login name
-system_user = getpass.getuser()
 
+# jar_path = pkg_resources.resource_filename('jars', 'postgresql-42.2.5.jar')
 postgre_jar = project_path + "/jars/postgresql-42.2.5.jar"
+snow_jar = project_path + "/jars/snowflake-jdbc-3.14.3.jar"
+oracle_jar = project_path + "/jars/ojdbc11.jar"
 
-batch_id = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-
-jar_path = postgre_jar
-spark = SparkSession.builder.master("local") \
+jar_path = postgre_jar+','+snow_jar + ','+oracle_jar
+spark = SparkSession.builder.master("local[2]") \
     .appName("test") \
     .config("spark.jars", jar_path) \
     .config("spark.driver.extraClassPath", jar_path) \
@@ -26,9 +25,15 @@ spark = SparkSession.builder.master("local") \
     .getOrCreate()
 
 
+# Fetch system user's login name
+system_user = getpass.getuser()
+
+batch_id = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+
+
 # Load from File to DB raw table
 
-file = spark.read.csv(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv", header=True)
+file = spark.read.csv(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv", header=True, inferSchema=True)
 file = file.filter(file.Identifier.isNotNull())
 
 file= file.withColumn('batch_date', lit(batch_id))\
@@ -47,6 +52,8 @@ file.write.mode("overwrite") \
     .option("password", "Dharmavaram1@") \
     .option("driver", 'org.postgresql.Driver') \
     .save()
+
+file.show()
 
 
 
@@ -148,14 +155,19 @@ file.write.mode("overwrite") \
 #     .option("driver", 'org.postgresql.Driver') \
 #     .save()
 #
-spark.stop()
+
 
 
 # #load data to snowflake
 #
-# contact_info_silver.write \
-#                 .mode("overwrite") \
-#                 .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
-#                 .option("url", "jdbc:snowflake://wbaiyzo-as58233.snowflakecomputing.com/?user=KATSREEN100&password=Dharmavaram1@&warehouse=COMPUTE_WH&db=ETL_AUTO&schema=CONTACT_INFO") \
-#                 .option("dbtable", "contact_info_silver") \
-#                 .save()
+
+url = 'jdbc:snowflake://wbaiyzo-as58233.snowflakecomputing.com/?user=KATSREEN100&password=Dharmavaram1@&warehouse=COMPUTE_WH&db=ETL_AUTO&schema=CONTACT_INFO'
+file.write.mode("overwrite") \
+    .format("jdbc") \
+    .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
+    .option("url", url) \
+    .option("dbtable", "ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW") \
+    .save()
+
+spark.stop()
+

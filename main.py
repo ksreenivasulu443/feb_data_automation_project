@@ -1,8 +1,12 @@
+import datetime
+import sys
+
 import pandas as pd
 import openpyxl
 import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import collect_set
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 from utility.read_utility import read_file, read_db
 from utility.validation_lib import count_check, duplicate_check, uniqueness_check, records_present_only_in_source, \
     null_value_check, data_compare, name_check, column_range_check, column_value_reference_check, schema_check
@@ -20,6 +24,19 @@ spark = SparkSession.builder.master("local[1]") \
 project_path = os.getcwd()
 template_path = project_path + '\config\Master_Test_Template.xlsx'
 test_cases = pd.read_excel(template_path)
+
+cwd = os.getcwd()
+# user = os.environ.get('USER')
+# print(user)
+result_local_file = cwd+'\Execution_detailed_summary.txt'
+print("result_local_file",result_local_file)
+
+# if os.path.exists(result_local_file):
+#     os.remove(result_local_file)
+#
+# file = open(result_local_file, 'a')
+# original = sys.stdout
+# sys.stdout = file
 
 Out = {
     "validation_Type": [],
@@ -113,5 +130,32 @@ summary = pd.DataFrame(Out)
 print(summary)
 
 summary.to_csv(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\execution_summary\summary.csv")
+# summary['bathc_id'] = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+schema = StructType([
+    StructField("validation_Type", StringType(), True),
+    StructField("Source_name", StringType(), True),
+    StructField("target_name", StringType(), True),
+    StructField("Number_of_source_Records", StringType(), True),
+    StructField("Number_of_target_Records", StringType(), True),
+    StructField("Number_of_failed_Records", StringType(), True),
+    StructField("column", StringType(), True),
+    StructField("Status", StringType(), True),
+    StructField("source_type", StringType(), True),
+    StructField("target_type", StringType(), True)
+])
+
+# Convert Pandas DataFrame to Spark DataFrame
+summary = spark.createDataFrame(summary, schema=schema)
+df2 = run_test_case.select('test_case_id','validation_Type','source','source_type','target','target_type')
+df2.show()
+summary.show()
+df2 = df2.withColumnRenamed("source", "Source_name") \
+         .withColumnRenamed("target","target_name")
+df2.show()
+
+summary= summary.join(df2, ['validation_Type','Source_name','target_name','source_type','target_type'], 'inner')
+
+summary.show()
+
 
 spark.stop()

@@ -1,0 +1,549 @@
++-------------------------------------------------------------------------------------------------+-----------+--------------+------------------+--------------------------------+-------------------------------------------------------------------------------------------+-----------+--------------+------------------+--------------------------------+------------+-------------+----------------------------------------------------------+------------------+----------+---------------+-------+-------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+|source                                                                                           |source_type|source_db_name|source_schema_path|source_transformation_query_path|target                                                                                     |target_type|target_db_name|target_schema_path|target_transformation_query_path|key_col_list|null_col_list|exclude_columns                                           |unique_col_list   |dq_column |expected_values|min_val|max_val|validation_Type                                                                                                                                      |
++-------------------------------------------------------------------------------------------------+-----------+--------------+------------------+--------------------------------+-------------------------------------------------------------------------------------------+-----------+--------------+------------------+--------------------------------+------------+-------------+----------------------------------------------------------+------------------+----------+---------------+-------+-------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+|C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_t2.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |IDENTIFIER  |Identifier   |batch_date,create_date,update_date,create_user,update_user|Identifier,Surname|zipcode   |1,2,3,4,5      |0      |0      |[column_value_reference_check]                                                                                                                       |
+|C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |contact_info_raw                                                                           |table      |postgres_db   |NOT APPL          |NOT APPL                        |IDENTIFIER  |Identifier   |batch_date,create_date,update_date,create_user,update_user|Identifier,Surname|zipcode   |1,2,3,4,5      |0      |0      |[column_value_reference_check]                                                                                                                       |
+|C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_t2.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |IDENTIFIER  |Identifier   |batch_date,create_date,update_date,create_user,update_user|Identifier,Surname|Surname   |NOT APP        |0      |0      |[name_check]                                                                                                                                         |
+|C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |contact_info_raw                                                                           |table      |postgres_db   |NOT APPL          |NOT APPL                        |IDENTIFIER  |Identifier   |batch_date,create_date,update_date,create_user,update_user|Identifier,Surname|NOT APP   |NOT APP        |0      |0      |[data_compare, count_check, schema_check, uniqueness_check, null_value_check, duplicate, records_present_only_in_source, records_present_only_target]|
+|C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_t2.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |IDENTIFIER  |Identifier   |batch_date,create_date,update_date,create_user,update_user|Identifier,Surname|Identifier|NOT APP        |1      |10     |[column_range_check]                                                                                                                                 |
+|C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |contact_info_raw                                                                           |table      |postgres_db   |NOT APPL          |NOT APPL                        |IDENTIFIER  |Identifier   |batch_date,create_date,update_date,create_user,update_user|Identifier,Surname|Identifier|NOT APP        |1      |10     |[column_range_check]                                                                                                                                 |
+|C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |contact_info_raw                                                                           |table      |postgres_db   |NOT APPL          |NOT APPL                        |IDENTIFIER  |Identifier   |batch_date,create_date,update_date,create_user,update_user|Identifier,Surname|Surname   |NOT APP        |0      |0      |[name_check]                                                                                                                                         |
+|C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_t2.csv|csv        |NOT APPL      |NOT APPL          |NOT APPL                        |IDENTIFIER  |Identifier   |batch_date,create_date,update_date,create_user,update_user|Identifier,Surname|NOT APP   |NOT APP        |0      |0      |[data_compare, count_check, schema_check, uniqueness_check, null_value_check, duplicate, records_present_only_in_source, records_present_only_target]|
++-------------------------------------------------------------------------------------------------+-----------+--------------+------------------+--------------------------------+-------------------------------------------------------------------------------------------+-----------+--------------+------------------+--------------------------------+------------+-------------+----------------------------------------------------------+------------------+----------+---------------+-------+-------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**************************************************
+Execution has started
+**************************************************
+**************************************************
+column_value_reference_check has started
+**************************************************
++----------+----------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+----------+
+|Identifier|   Surname|Given_Name|Middle_Initial|Suffix|Primary_Street_Number|Primary_Street_Name|           City|State|Zipcode|Primary_Street_Number_Prev|Primary_Street_Name_Prev|         City_Prev|State_Prev|Zipcode_Prev|               Email|               Phone|Birthmonth|is_present|
++----------+----------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+----------+
+|  97614870|    Powell|   Chelsea|             D|   Jr.|                92960|    Stewart Estates|Christopherberg|   RI|  30499|                     70480|       Nichole Mountains|        Ramosburgh|        WY|       92927|rogersallison@exa...|        407.615.4979|    192407|     false|
+|  97000895|    Miller|     David|             U|    MD|                 9331|     Madison Harbor|     Aaronmouth|   PW|  73032|                       927|            Richard Walk| New Thomasborough|        ND|       63467|valerie11@example...|  (938)514-7380x6374|    202010|     false|
+|  80238710|      Long|  Jennifer|             W|   DVM|                  893|         Rivera Dam| Lake Jamestown|   VT|  38246|                     83332|         Sanders Islands|        Miguelland|        UT|       81548|ronaldcooper@exam...|   586-439-7920x4868|    194506|     false|
+|  72006374|     Payne|    George|             X|   DVM|                 8818|        Potts Creek| Port Johnburgh|   TX|  72472|                       372|           Webb Overpass|        Gomezville|        WA|        4973|randolphcheryl@ex...|   923-758-0199x4408|    197204|     false|
+|  13840061|     Clark|    Edward|             U|    MD|                 6339|      Ashley Tunnel|   Timothymouth|   VI|  38246|                       906|          Alvarez Courts|East Robertborough|        ID|       38924|seanortega@exampl...|          7292018642|    197908|     false|
+|  67278564|Mc'Thomson|    Rachel|             M|    II|                 4566|    Bright Mountain|    Morenoburgh|   NY|  28787|                       937|            Myers Bridge|  South Gracemouth|        AZ|       47539|sydney77@example.org| (827)273-8553x50877|    190105|     false|
+|  17670319|    Larsen|     Jamie|             G|   PhD|                 5119|       Herrera Loaf|     Port Andre|   HI|  55887|                     91130|          Dickerson Port|        Lake Jared|        FM|       61750|walkercindy@examp...| +1-334-442-2338x515|    201103|     false|
+|  80326974|      Rice|    Thomas|             A|   PhD|                59664|      Wood Villages|       Port Roy|   AS|  11669|                      2791|          Cochran Summit|       Sandersland|        GA|       61118|shortbrett@exampl...|       (884)749-9291|    196803|     false|
+|  45693537|   Johnson|     Kayla|             A|    MD|                 6199|          Chad Port|     Port James|   MA|  69818|                      9332|               Megan Row|     South Phillip|        AZ|       94453|william85@example...|+1-212-615-1503x1...|    190102|     false|
+|  89155751|      King|   Jeffrey|             B|    II|                 4076|   Michelle Parkway|       Jodistad|   KS|  40675|                      2299|              Davis Glen|     East Sarabury|        CA|       47927|frankpatrick@exam...|        402.878.8780|    191402|     false|
+|  89155751|      King|   Jeffrey|             B|    II|                 4076|   Michelle Parkway|       Jodistad|   KS|  40675|                      2299|              Davis Glen|     East Sarabury|        CA|       47927|frankpatrick@exam...|        402.878.8780|    191402|     false|
+|      null|     Payne|    George|             X|   DVM|                 8818|        Potts Creek| Port Johnburgh|   TX|  72472|                       372|           Webb Overpass|        Gomezville|        WA|        4973|randolphcheryl@ex...|   923-758-0199x4408|    197204|     false|
++----------+----------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+----------+
+
+**************************************************
+column_value_reference_check has been completed
+**************************************************
+{'url': 'jdbc:postgresql://localhost:5432/postgres', 'user': 'postgres', 'password': 'Dharmavaram1@', 'driver': 'org.postgresql.Driver'}
+**************************************************
+column_value_reference_check has started
+**************************************************
++----------+-------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+----------+
+|Identifier|Surname|Given_Name|Middle_Initial|Suffix|Primary_Street_Number|Primary_Street_Name|           City|State|Zipcode|Primary_Street_Number_Prev|Primary_Street_Name_Prev|         City_Prev|State_Prev|Zipcode_Prev|               Email|               Phone|Birthmonth|is_present|
++----------+-------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+----------+
+|  97614870| Powell|   Chelsea|             D|   Jr.|                92960|    Stewart Estates|Christopherberg|   RI|  30499|                     70480|       Nichole Mountains|        Ramosburgh|        WY|       92927|rogersallison@exa...|        407.615.4979|    192407|     false|
+|  97000895| Miller|     David|             U|    MD|                 9331|     Madison Harbor|     Aaronmouth|   PW|  73032|                       927|            Richard Walk| New Thomasborough|        ND|       63467|valerie11@example...|  (938)514-7380x6374|    202010|     false|
+|  80238710|   Long|  Jennifer|             W|   DVM|                  893|         Rivera Dam| Lake Jamestown|   VT|  38246|                     83332|         Sanders Islands|        Miguelland|        UT|       81548|ronaldcooper@exam...|   586-439-7920x4868|    194506|     false|
+|  72006374|  Payne|    George|             X|   DVM|                 8818|        Potts Creek| Port Johnburgh|   TX|  72472|                       372|           Webb Overpass|        Gomezville|        WA|       04973|randolphcheryl@ex...|   923-758-0199x4408|    197204|     false|
+|  13840061|  Clark|    Edward|             U|    MD|                 6339|      Ashley Tunnel|   Timothymouth|   VI|  38246|                       906|          Alvarez Courts|East Robertborough|        ID|       38924|seanortega@exampl...|          7292018642|    197908|     false|
+|  67278564|  Smith|    Rachel|             M|    II|                 4566|    Bright Mountain|    Morenoburgh|   NY|  28787|                       937|            Myers Bridge|  South Gracemouth|        AZ|       47539|sydney77@example.org| (827)273-8553x50877|    190105|     false|
+|  17670319| Larsen|     Jamie|             G|   PhD|                 5119|       Herrera Loaf|     Port Andre|   HI|  55887|                     91130|          Dickerson Port|        Lake Jared|        FM|       61750|walkercindy@examp...| +1-334-442-2338x515|    201103|     false|
+|  80326974|   Rice|    Thomas|             A|   PhD|                59664|      Wood Villages|       Port Roy|   AS|  11669|                      2791|          Cochran Summit|       Sandersland|        GA|       61118|shortbrett@exampl...|       (884)749-9291|    196803|     false|
+|  45693537|Johnson|     Kayla|             A|    MD|                 6199|          Chad Port|     Port James|   MA|  69818|                      9332|               Megan Row|     South Phillip|        AZ|       94453|william85@example...|+1-212-615-1503x1...|    190102|     false|
+|  89155751|   King|   Jeffrey|             B|    II|                 4076|   Michelle Parkway|       Jodistad|   KS|  40675|                      2299|              Davis Glen|     East Sarabury|        CA|       47927|frankpatrick@exam...|        402.878.8780|    191402|     false|
++----------+-------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+----------+
+
+**************************************************
+column_value_reference_check has been completed
+**************************************************
+**************************************************
+name_check has started
+**************************************************
++----------+----------+----------+--------------+------+---------------------+-------------------+-----------+-----+-------+--------------------------+------------------------+----------------+----------+------------+--------------------+-------------------+----------+--------+
+|Identifier|   Surname|Given_Name|Middle_Initial|Suffix|Primary_Street_Number|Primary_Street_Name|       City|State|Zipcode|Primary_Street_Number_Prev|Primary_Street_Name_Prev|       City_Prev|State_Prev|Zipcode_Prev|               Email|              Phone|Birthmonth|is_valid|
++----------+----------+----------+--------------+------+---------------------+-------------------+-----------+-----+-------+--------------------------+------------------------+----------------+----------+------------+--------------------+-------------------+----------+--------+
+|  67278564|Mc'Thomson|    Rachel|             M|    II|                 4566|    Bright Mountain|Morenoburgh|   NY|  28787|                       937|            Myers Bridge|South Gracemouth|        AZ|       47539|sydney77@example.org|(827)273-8553x50877|    190105|   false|
++----------+----------+----------+--------------+------+---------------------+-------------------+-----------+-----+-------+--------------------------+------------------------+----------------+----------+------------+--------------------+-------------------+----------+--------+
+
+**************************************************
+name_check has been completed
+**************************************************
+{'url': 'jdbc:postgresql://localhost:5432/postgres', 'user': 'postgres', 'password': 'Dharmavaram1@', 'driver': 'org.postgresql.Driver'}
+**************************************************
+data_compare has started
+**************************************************
+failed records are 
++----------+--------------------+
+|identifier|            hash_key|
++----------+--------------------+
+|  72006374|78fb7630001039510...|
++----------+--------------------+
+
+identifier
+surname
++----------+--------------+--------------+----------+
+|identifier|source_Surname|target_Surname|comparison|
++----------+--------------+--------------+----------+
++----------+--------------+--------------+----------+
+
+given_name
++----------+-----------------+-----------------+----------+
+|identifier|source_Given_Name|target_Given_Name|comparison|
++----------+-----------------+-----------------+----------+
++----------+-----------------+-----------------+----------+
+
+middle_initial
++----------+---------------------+---------------------+----------+
+|identifier|source_Middle_Initial|target_Middle_Initial|comparison|
++----------+---------------------+---------------------+----------+
++----------+---------------------+---------------------+----------+
+
+suffix
++----------+-------------+-------------+----------+
+|identifier|source_Suffix|target_Suffix|comparison|
++----------+-------------+-------------+----------+
++----------+-------------+-------------+----------+
+
+primary_street_number
++----------+----------------------------+----------------------------+----------+
+|identifier|source_Primary_Street_Number|target_Primary_Street_Number|comparison|
++----------+----------------------------+----------------------------+----------+
++----------+----------------------------+----------------------------+----------+
+
+primary_street_name
++----------+--------------------------+--------------------------+----------+
+|identifier|source_Primary_Street_Name|target_Primary_Street_Name|comparison|
++----------+--------------------------+--------------------------+----------+
++----------+--------------------------+--------------------------+----------+
+
+city
++----------+-----------+-----------+----------+
+|identifier|source_City|target_City|comparison|
++----------+-----------+-----------+----------+
++----------+-----------+-----------+----------+
+
+state
++----------+------------+------------+----------+
+|identifier|source_State|target_State|comparison|
++----------+------------+------------+----------+
++----------+------------+------------+----------+
+
+zipcode
++----------+--------------+--------------+----------+
+|identifier|source_Zipcode|target_Zipcode|comparison|
++----------+--------------+--------------+----------+
++----------+--------------+--------------+----------+
+
+primary_street_number_prev
++----------+---------------------------------+---------------------------------+----------+
+|identifier|source_Primary_Street_Number_Prev|target_Primary_Street_Number_Prev|comparison|
++----------+---------------------------------+---------------------------------+----------+
++----------+---------------------------------+---------------------------------+----------+
+
+primary_street_name_prev
++----------+-------------------------------+-------------------------------+----------+
+|identifier|source_Primary_Street_Name_Prev|target_Primary_Street_Name_Prev|comparison|
++----------+-------------------------------+-------------------------------+----------+
++----------+-------------------------------+-------------------------------+----------+
+
+city_prev
++----------+----------------+----------------+----------+
+|identifier|source_City_Prev|target_City_Prev|comparison|
++----------+----------------+----------------+----------+
++----------+----------------+----------------+----------+
+
+state_prev
++----------+-----------------+-----------------+----------+
+|identifier|source_State_Prev|target_State_Prev|comparison|
++----------+-----------------+-----------------+----------+
++----------+-----------------+-----------------+----------+
+
+zipcode_prev
++----------+-------------------+-------------------+----------+
+|identifier|source_Zipcode_Prev|target_Zipcode_Prev|comparison|
++----------+-------------------+-------------------+----------+
++----------+-------------------+-------------------+----------+
+
+email
++----------+------------+------------+----------+
+|identifier|source_Email|target_Email|comparison|
++----------+------------+------------+----------+
++----------+------------+------------+----------+
+
+phone
++----------+------------+------------+----------+
+|identifier|source_Phone|target_Phone|comparison|
++----------+------------+------------+----------+
++----------+------------+------------+----------+
+
+birthmonth
++----------+-----------------+-----------------+----------+
+|identifier|source_Birthmonth|target_Birthmonth|comparison|
++----------+-----------------+-----------------+----------+
++----------+-----------------+-----------------+----------+
+
+**************************************************
+data_compare has been completed
+**************************************************
+**************************************************
+count_check has started
+**************************************************
+source count 10
+target coungt 10
+count is matching
+**************************************************
+count_check has been completed
+**************************************************
+**************************************************
+schema_check has started
+**************************************************
++--------------------+--------------------+----------------+----------------+------+
+|     source_col_name|     target_col_name|source_data_type|target_data_type|status|
++--------------------+--------------------+----------------+----------------+------+
+|          Birthmonth|          Birthmonth|             int|          string|  fail|
+|          Identifier|          Identifier|             int|          string|  fail|
+|Primary_Street_Nu...|Primary_Street_Nu...|             int|          string|  fail|
+|Primary_Street_Nu...|Primary_Street_Nu...|             int|          string|  fail|
+|             Zipcode|             Zipcode|             int|          string|  fail|
+|        Zipcode_Prev|        Zipcode_Prev|             int|          string|  fail|
++--------------------+--------------------+----------------+----------------+------+
+
+**************************************************
+schema_check has been completed
+**************************************************
+**************************************************
+uniqueness_check has started
+**************************************************
++----------+-----+
+|Identifier|count|
++----------+-----+
++----------+-----+
+
+Duplicates not present Identifier
++-------+-----+
+|Surname|count|
++-------+-----+
++-------+-----+
+
+Duplicates not present Surname
+**************************************************
+uniqueness_check has been completed
+**************************************************
+**************************************************
+null_value_check has started
+**************************************************
++----------------+
+|Null_value_count|
++----------------+
+|               0|
++----------------+
+
+**************************************************
+null_value_check has been completed
+**************************************************
+**************************************************
+records_present_only_in_source has started
+**************************************************
++----------+-----------+-----------+
+|IDENTIFIER|SourceCount|TargetCount|
++----------+-----------+-----------+
++----------+-----------+-----------+
+
+Key column record present in target but not in Source :0
+**************************************************
+records_present_only_in_source has been completed
+**************************************************
+**************************************************
+records_present_only_target has started
+**************************************************
++----------+-----------+-----------+
+|IDENTIFIER|SourceCount|TargetCount|
++----------+-----------+-----------+
++----------+-----------+-----------+
+
+Key column record present in target but not in Source :0
+**************************************************
+records_present_only_target has been completed
+**************************************************
+**************************************************
+column_range_check has started
+**************************************************
++----------+----------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+
+|Identifier|   Surname|Given_Name|Middle_Initial|Suffix|Primary_Street_Number|Primary_Street_Name|           City|State|Zipcode|Primary_Street_Number_Prev|Primary_Street_Name_Prev|         City_Prev|State_Prev|Zipcode_Prev|               Email|               Phone|Birthmonth|
++----------+----------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+
+|  97614870|    Powell|   Chelsea|             D|   Jr.|                92960|    Stewart Estates|Christopherberg|   RI|  30499|                     70480|       Nichole Mountains|        Ramosburgh|        WY|       92927|rogersallison@exa...|        407.615.4979|    192407|
+|  97000895|    Miller|     David|             U|    MD|                 9331|     Madison Harbor|     Aaronmouth|   PW|  73032|                       927|            Richard Walk| New Thomasborough|        ND|       63467|valerie11@example...|  (938)514-7380x6374|    202010|
+|  80238710|      Long|  Jennifer|             W|   DVM|                  893|         Rivera Dam| Lake Jamestown|   VT|  38246|                     83332|         Sanders Islands|        Miguelland|        UT|       81548|ronaldcooper@exam...|   586-439-7920x4868|    194506|
+|  72006374|     Payne|    George|             X|   DVM|                 8818|        Potts Creek| Port Johnburgh|   TX|  72472|                       372|           Webb Overpass|        Gomezville|        WA|        4973|randolphcheryl@ex...|   923-758-0199x4408|    197204|
+|  13840061|     Clark|    Edward|             U|    MD|                 6339|      Ashley Tunnel|   Timothymouth|   VI|  38246|                       906|          Alvarez Courts|East Robertborough|        ID|       38924|seanortega@exampl...|          7292018642|    197908|
+|  67278564|Mc'Thomson|    Rachel|             M|    II|                 4566|    Bright Mountain|    Morenoburgh|   NY|  28787|                       937|            Myers Bridge|  South Gracemouth|        AZ|       47539|sydney77@example.org| (827)273-8553x50877|    190105|
+|  17670319|    Larsen|     Jamie|             G|   PhD|                 5119|       Herrera Loaf|     Port Andre|   HI|  55887|                     91130|          Dickerson Port|        Lake Jared|        FM|       61750|walkercindy@examp...| +1-334-442-2338x515|    201103|
+|  80326974|      Rice|    Thomas|             A|   PhD|                59664|      Wood Villages|       Port Roy|   AS|  11669|                      2791|          Cochran Summit|       Sandersland|        GA|       61118|shortbrett@exampl...|       (884)749-9291|    196803|
+|  45693537|   Johnson|     Kayla|             A|    MD|                 6199|          Chad Port|     Port James|   MA|  69818|                      9332|               Megan Row|     South Phillip|        AZ|       94453|william85@example...|+1-212-615-1503x1...|    190102|
+|  89155751|      King|   Jeffrey|             B|    II|                 4076|   Michelle Parkway|       Jodistad|   KS|  40675|                      2299|              Davis Glen|     East Sarabury|        CA|       47927|frankpatrick@exam...|        402.878.8780|    191402|
+|  89155751|      King|   Jeffrey|             B|    II|                 4076|   Michelle Parkway|       Jodistad|   KS|  40675|                      2299|              Davis Glen|     East Sarabury|        CA|       47927|frankpatrick@exam...|        402.878.8780|    191402|
++----------+----------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+
+
+**************************************************
+column_range_check has been completed
+**************************************************
+{'url': 'jdbc:postgresql://localhost:5432/postgres', 'user': 'postgres', 'password': 'Dharmavaram1@', 'driver': 'org.postgresql.Driver'}
+**************************************************
+column_range_check has started
+**************************************************
++----------+-------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+
+|Identifier|Surname|Given_Name|Middle_Initial|Suffix|Primary_Street_Number|Primary_Street_Name|           City|State|Zipcode|Primary_Street_Number_Prev|Primary_Street_Name_Prev|         City_Prev|State_Prev|Zipcode_Prev|               Email|               Phone|Birthmonth|
++----------+-------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+
+|  97614870| Powell|   Chelsea|             D|   Jr.|                92960|    Stewart Estates|Christopherberg|   RI|  30499|                     70480|       Nichole Mountains|        Ramosburgh|        WY|       92927|rogersallison@exa...|        407.615.4979|    192407|
+|  97000895| Miller|     David|             U|    MD|                 9331|     Madison Harbor|     Aaronmouth|   PW|  73032|                       927|            Richard Walk| New Thomasborough|        ND|       63467|valerie11@example...|  (938)514-7380x6374|    202010|
+|  80238710|   Long|  Jennifer|             W|   DVM|                  893|         Rivera Dam| Lake Jamestown|   VT|  38246|                     83332|         Sanders Islands|        Miguelland|        UT|       81548|ronaldcooper@exam...|   586-439-7920x4868|    194506|
+|  72006374|  Payne|    George|             X|   DVM|                 8818|        Potts Creek| Port Johnburgh|   TX|  72472|                       372|           Webb Overpass|        Gomezville|        WA|       04973|randolphcheryl@ex...|   923-758-0199x4408|    197204|
+|  13840061|  Clark|    Edward|             U|    MD|                 6339|      Ashley Tunnel|   Timothymouth|   VI|  38246|                       906|          Alvarez Courts|East Robertborough|        ID|       38924|seanortega@exampl...|          7292018642|    197908|
+|  67278564|  Smith|    Rachel|             M|    II|                 4566|    Bright Mountain|    Morenoburgh|   NY|  28787|                       937|            Myers Bridge|  South Gracemouth|        AZ|       47539|sydney77@example.org| (827)273-8553x50877|    190105|
+|  17670319| Larsen|     Jamie|             G|   PhD|                 5119|       Herrera Loaf|     Port Andre|   HI|  55887|                     91130|          Dickerson Port|        Lake Jared|        FM|       61750|walkercindy@examp...| +1-334-442-2338x515|    201103|
+|  80326974|   Rice|    Thomas|             A|   PhD|                59664|      Wood Villages|       Port Roy|   AS|  11669|                      2791|          Cochran Summit|       Sandersland|        GA|       61118|shortbrett@exampl...|       (884)749-9291|    196803|
+|  45693537|Johnson|     Kayla|             A|    MD|                 6199|          Chad Port|     Port James|   MA|  69818|                      9332|               Megan Row|     South Phillip|        AZ|       94453|william85@example...|+1-212-615-1503x1...|    190102|
+|  89155751|   King|   Jeffrey|             B|    II|                 4076|   Michelle Parkway|       Jodistad|   KS|  40675|                      2299|              Davis Glen|     East Sarabury|        CA|       47927|frankpatrick@exam...|        402.878.8780|    191402|
++----------+-------+----------+--------------+------+---------------------+-------------------+---------------+-----+-------+--------------------------+------------------------+------------------+----------+------------+--------------------+--------------------+----------+
+
+**************************************************
+column_range_check has been completed
+**************************************************
+{'url': 'jdbc:postgresql://localhost:5432/postgres', 'user': 'postgres', 'password': 'Dharmavaram1@', 'driver': 'org.postgresql.Driver'}
+**************************************************
+name_check has started
+**************************************************
++----------+-------+----------+--------------+------+---------------------+-------------------+----+-----+-------+--------------------------+------------------------+---------+----------+------------+-----+-----+----------+--------+
+|Identifier|Surname|Given_Name|Middle_Initial|Suffix|Primary_Street_Number|Primary_Street_Name|City|State|Zipcode|Primary_Street_Number_Prev|Primary_Street_Name_Prev|City_Prev|State_Prev|Zipcode_Prev|Email|Phone|Birthmonth|is_valid|
++----------+-------+----------+--------------+------+---------------------+-------------------+----+-----+-------+--------------------------+------------------------+---------+----------+------------+-----+-----+----------+--------+
++----------+-------+----------+--------------+------+---------------------+-------------------+----+-----+-------+--------------------------+------------------------+---------+----------+------------+-----+-----+----------+--------+
+
+**************************************************
+name_check has been completed
+**************************************************
+**************************************************
+data_compare has started
+**************************************************
+failed records are 
++----------+--------------------+
+|identifier|            hash_key|
++----------+--------------------+
+|  67278564|eacf7ac87f32b740e...|
+|      null|                null|
+|  89155751|f133e5e16f3b32c43...|
++----------+--------------------+
+
+identifier
+surname
++----------+--------------+--------------+----------+
+|identifier|source_Surname|target_Surname|comparison|
++----------+--------------+--------------+----------+
+|  67278564|         Smith|    Mc'Thomson|     False|
++----------+--------------+--------------+----------+
+
+given_name
++----------+-----------------+-----------------+----------+
+|identifier|source_Given_Name|target_Given_Name|comparison|
++----------+-----------------+-----------------+----------+
++----------+-----------------+-----------------+----------+
+
+middle_initial
++----------+---------------------+---------------------+----------+
+|identifier|source_Middle_Initial|target_Middle_Initial|comparison|
++----------+---------------------+---------------------+----------+
++----------+---------------------+---------------------+----------+
+
+suffix
++----------+-------------+-------------+----------+
+|identifier|source_Suffix|target_Suffix|comparison|
++----------+-------------+-------------+----------+
++----------+-------------+-------------+----------+
+
+primary_street_number
++----------+----------------------------+----------------------------+----------+
+|identifier|source_Primary_Street_Number|target_Primary_Street_Number|comparison|
++----------+----------------------------+----------------------------+----------+
++----------+----------------------------+----------------------------+----------+
+
+primary_street_name
++----------+--------------------------+--------------------------+----------+
+|identifier|source_Primary_Street_Name|target_Primary_Street_Name|comparison|
++----------+--------------------------+--------------------------+----------+
++----------+--------------------------+--------------------------+----------+
+
+city
++----------+-----------+-----------+----------+
+|identifier|source_City|target_City|comparison|
++----------+-----------+-----------+----------+
++----------+-----------+-----------+----------+
+
+state
++----------+------------+------------+----------+
+|identifier|source_State|target_State|comparison|
++----------+------------+------------+----------+
++----------+------------+------------+----------+
+
+zipcode
++----------+--------------+--------------+----------+
+|identifier|source_Zipcode|target_Zipcode|comparison|
++----------+--------------+--------------+----------+
++----------+--------------+--------------+----------+
+
+primary_street_number_prev
++----------+---------------------------------+---------------------------------+----------+
+|identifier|source_Primary_Street_Number_Prev|target_Primary_Street_Number_Prev|comparison|
++----------+---------------------------------+---------------------------------+----------+
++----------+---------------------------------+---------------------------------+----------+
+
+primary_street_name_prev
++----------+-------------------------------+-------------------------------+----------+
+|identifier|source_Primary_Street_Name_Prev|target_Primary_Street_Name_Prev|comparison|
++----------+-------------------------------+-------------------------------+----------+
++----------+-------------------------------+-------------------------------+----------+
+
+city_prev
++----------+----------------+----------------+----------+
+|identifier|source_City_Prev|target_City_Prev|comparison|
++----------+----------------+----------------+----------+
++----------+----------------+----------------+----------+
+
+state_prev
++----------+-----------------+-----------------+----------+
+|identifier|source_State_Prev|target_State_Prev|comparison|
++----------+-----------------+-----------------+----------+
++----------+-----------------+-----------------+----------+
+
+zipcode_prev
++----------+-------------------+-------------------+----------+
+|identifier|source_Zipcode_Prev|target_Zipcode_Prev|comparison|
++----------+-------------------+-------------------+----------+
++----------+-------------------+-------------------+----------+
+
+email
++----------+------------+------------+----------+
+|identifier|source_Email|target_Email|comparison|
++----------+------------+------------+----------+
++----------+------------+------------+----------+
+
+phone
++----------+------------+------------+----------+
+|identifier|source_Phone|target_Phone|comparison|
++----------+------------+------------+----------+
++----------+------------+------------+----------+
+
+birthmonth
++----------+-----------------+-----------------+----------+
+|identifier|source_Birthmonth|target_Birthmonth|comparison|
++----------+-----------------+-----------------+----------+
++----------+-----------------+-----------------+----------+
+
+**************************************************
+data_compare has been completed
+**************************************************
+**************************************************
+count_check has started
+**************************************************
+source count 10
+target coungt 12
+**************************************************
+count_check has been completed
+**************************************************
+**************************************************
+schema_check has started
+**************************************************
++---------------+---------------+----------------+----------------+------+
+|source_col_name|target_col_name|source_data_type|target_data_type|status|
++---------------+---------------+----------------+----------------+------+
++---------------+---------------+----------------+----------------+------+
+
+**************************************************
+schema_check has been completed
+**************************************************
+**************************************************
+uniqueness_check has started
+**************************************************
++----------+-----+
+|Identifier|count|
++----------+-----+
+|  89155751|    2|
++----------+-----+
+
+duplicates present on  Identifier
++-------+-----+
+|Surname|count|
++-------+-----+
+|  Payne|    2|
+|   King|    2|
++-------+-----+
+
+duplicates present on  Surname
+**************************************************
+uniqueness_check has been completed
+**************************************************
+**************************************************
+null_value_check has started
+**************************************************
++----------------+
+|Null_value_count|
++----------------+
+|               1|
++----------------+
+
+**************************************************
+null_value_check has been completed
+**************************************************
+**************************************************
+records_present_only_in_source has started
+**************************************************
++----------+-----------+-----------+
+|IDENTIFIER|SourceCount|TargetCount|
++----------+-----------+-----------+
+|  89155751|          1|          2|
++----------+-----------+-----------+
+
+Key column record present in target but not in Source :1
+**************************************************
+records_present_only_in_source has been completed
+**************************************************
+**************************************************
+records_present_only_target has started
+**************************************************
++----------+-----------+-----------+
+|IDENTIFIER|SourceCount|TargetCount|
++----------+-----------+-----------+
+|  89155751|          1|          2|
++----------+-----------+-----------+
+
+Key column record present in target but not in Source :1
+**************************************************
+records_present_only_target has been completed
+**************************************************
+{'validation_Type': ['column_value_reference_check', 'column_value_reference_check', 'name_check', 'data_compare', 'count_check', 'schema_check', 'uniqueness_check', 'uniqueness_check', 'null_value_check', 'records_present_only_in_source', 'records_present_only_target', 'column_range_check', 'column_range_check', 'name_check', 'data_compare', 'count_check', 'schema_check', 'uniqueness_check', 'uniqueness_check', 'null_value_check', 'records_present_only_in_source', 'records_present_only_target'], 'Source_name': ['C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_20240423.csv'], 'target_name': ['C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'contact_info_raw', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'contact_info_raw', 'contact_info_raw', 'contact_info_raw', 'contact_info_raw', 'contact_info_raw', 'contact_info_raw', 'contact_info_raw', 'contact_info_raw', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'contact_info_raw', 'contact_info_raw', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv', 'C:\\Users\\A4952\\PycharmProjects\\feb_data_automation_project\\source_files\\contact_info_t2.csv'], 'Number_of_source_Records': ['NOT APPL', 'NOT APPL', 'NOT APPL', 10, 10, 18, 'NOT APPL', 'NOT APPL', 'NOT APPL', 10, 10, 'NOT APPL', 'NOT APPL', 'NOT APPL', 10, 10, 18, 'NOT APPL', 'NOT APPL', 'NOT APPL', 10, 10], 'Number_of_target_Records': [12, 10, 12, 10, 10, 18, 10, 10, 10, 10, 10, 12, 10, 10, 12, 12, 18, 12, 12, 12, 12, 12], 'Number_of_failed_Records': [12, 10, 1, 2, 0, 6, 0, 0, 0, 0, 0, 11, 10, 0, 4, -2, 0, 1, 2, 1, 1, 1], 'column': ['zipcode', 'zipcode', 'Surname', 'IDENTIFIER', 'IDENTIFIER', 'NOT APP', 'Identifier', 'Surname', 'Identifier', 'IDENTIFIER', 'IDENTIFIER', 'Identifier', 'Identifier', 'Surname', 'IDENTIFIER', 'IDENTIFIER', 'NOT APP', 'Identifier', 'Surname', 'Identifier', 'IDENTIFIER', 'IDENTIFIER'], 'Status': ['FAIL', 'FAIL', 'FAIL', 'FAIL', 'PASS', 'FAIL', 'PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'FAIL', 'FAIL', 'PASS', 'FAIL', 'FAIL', 'PASS', 'FAIL', 'FAIL', 'FAIL', 'FAIL', 'FAIL'], 'source_type': ['NOT APPL', 'NOT APPL', 'NOT APPL', 'csv', 'csv', 'csv', 'NOT APPL', 'NOT APPL', 'NOT APPL', 'csv', 'csv', 'NOT APPL', 'NOT APPL', 'NOT APPL', 'csv', 'csv', 'csv', 'NOT APPL', 'NOT APPL', 'NOT APPL', 'csv', 'csv'], 'target_type': ['csv', 'table', 'csv', 'table', 'table', 'table', 'table', 'table', 'table', 'table', 'table', 'csv', 'table', 'table', 'csv', 'csv', 'csv', 'csv', 'csv', 'csv', 'csv', 'csv']}
+                   validation_Type  ... target_type
+0     column_value_reference_check  ...         csv
+1     column_value_reference_check  ...       table
+2                       name_check  ...         csv
+3                     data_compare  ...       table
+4                      count_check  ...       table
+5                     schema_check  ...       table
+6                 uniqueness_check  ...       table
+7                 uniqueness_check  ...       table
+8                 null_value_check  ...       table
+9   records_present_only_in_source  ...       table
+10     records_present_only_target  ...       table
+11              column_range_check  ...         csv
+12              column_range_check  ...       table
+13                      name_check  ...       table
+14                    data_compare  ...         csv
+15                     count_check  ...         csv
+16                    schema_check  ...         csv
+17                uniqueness_check  ...         csv
+18                uniqueness_check  ...         csv
+19                null_value_check  ...         csv
+20  records_present_only_in_source  ...         csv
+21     records_present_only_target  ...         csv
+
+[22 rows x 10 columns]
