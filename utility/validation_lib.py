@@ -264,9 +264,9 @@ def schema_check(source, target, spark, Out, row, validation):
     target_schema = spark.sql("describe target")
     target_schema.createOrReplaceTempView("target_schema")
 
-    failed = spark.sql('''select a.col_name source_col_name,b.col_name target_col_name, a.data_type as source_data_type, b.data_type as target_data_type, 
+    failed = spark.sql('''select lower(a.col_name) source_col_name,lower(b.col_name) target_col_name, a.data_type as source_data_type, b.data_type as target_data_type, 
     case when a.data_type=b.data_type then "pass" else "fail" end status
-    from source_schema a full join target_schema b on a.col_name=b.col_name''').filter(" status = 'fail' ")
+    from source_schema a full join target_schema b on lower(a.col_name)=lower(b.col_name)''').filter(" status = 'fail' ")
     source_count = source_schema.count()
     target_count = target_schema.count()
     failed_count = failed.count()

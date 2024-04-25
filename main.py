@@ -7,13 +7,17 @@ import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import collect_set
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
-from utility.read_utility import read_file, read_db
+from utility.read_utility import read_file, read_db, read_snowflake
 from utility.validation_lib import count_check, duplicate_check, uniqueness_check, records_present_only_in_source, \
     null_value_check, data_compare, name_check, column_range_check, column_value_reference_check, schema_check
 
 project_path = os.getcwd()
 
-jar_path = project_path + "/jars/postgresql-42.2.5.jar"
+postgre_jar = project_path + "/jars/postgresql-42.2.5.jar"
+snow_jar = project_path + "/jars/snowflake-jdbc-3.14.3.jar"
+#oracle_jar = project_path + "/jars/ojdbc11.jar"
+
+jar_path = postgre_jar+','+snow_jar
 spark = SparkSession.builder.master("local[1]") \
     .appName("test") \
     .config("spark.jars", jar_path) \
@@ -75,6 +79,12 @@ for row in validations:
                          table=row['source'],
                          database=row['source_db_name'],
                          query=row['source_transformation_query_path'],row=row)
+    elif row['source_type'] == 'snowflake':
+        source = read_snowflake(spark=spark,
+                        table=row['source'],
+                        database=row['source_db_name'],
+                        query=row['source_transformation_query_path'], row=row)
+
 
     else:
         source = read_file(type=row['source_type'],
@@ -88,6 +98,11 @@ for row in validations:
                          table=row['target'],
                          database=row['target_db_name'],
                          query=row['target_transformation_query_path'],row=row)
+    elif row['target_type'] == 'snowflake':
+        target = read_snowflake(spark=spark,
+                        table=row['target'],
+                        database=row['target_db_name'],
+                        query=row['target_transformation_query_path'], row=row)
 
     else:
         target = read_file(type=row['target_type'],
@@ -96,8 +111,6 @@ for row in validations:
                            spark=spark,
                            schema=row['target_schema_path'])
 
-    source_count = source.count()
-    target_count = target.count()
 
     for validation in row['validation_Type']:
         validation = validation.lower()

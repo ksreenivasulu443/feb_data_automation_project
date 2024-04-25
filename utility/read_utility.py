@@ -89,7 +89,7 @@ def read_db(spark: SparkSession,
 def read_snowflake(spark: SparkSession,
             table: str,
             database: str,
-            query: str):
+            query: str, row):
     try:
         with open(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\config\Config.json") as f:
             config_data = json.load(f)[database]
@@ -110,7 +110,7 @@ def read_snowflake(spark: SparkSession,
                 .format("jdbc") \
                 .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
                 .option("url", config_data['jdbc_url']) \
-                .option("query", table) \
+                .option("dbtable", table) \
                 .load()
 
         return  df.drop('batch_date','create_date','update_date','create_user','update_user')
