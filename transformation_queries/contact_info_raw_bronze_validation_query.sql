@@ -1,6 +1,6 @@
 SELECT
     CAST("Identifier" AS DECIMAL(10)) AS Identifier,
-    UPPER("Surname") AS Surname,
+   UPPER ("Surname") AS Surname,
     UPPER("Given_Name") AS given_name,
     UPPER("Middle_Initial") AS middle_initial,
     "Suffix" ,

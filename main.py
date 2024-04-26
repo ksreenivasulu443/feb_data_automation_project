@@ -18,7 +18,7 @@ snow_jar = project_path + "/jars/snowflake-jdbc-3.14.3.jar"
 #oracle_jar = project_path + "/jars/ojdbc11.jar"
 
 jar_path = postgre_jar+','+snow_jar
-spark = SparkSession.builder.master("local[1]") \
+spark = SparkSession.builder.master("local[5]") \
     .appName("test") \
     .config("spark.jars", jar_path) \
     .config("spark.driver.extraClassPath", jar_path) \

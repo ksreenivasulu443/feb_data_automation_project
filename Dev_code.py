@@ -33,7 +33,7 @@ batch_id = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
 # Load from File to DB raw table
 
-file = spark.read.csv(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv", header=True, inferSchema=True)
+file = spark.read.csv(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\contact_info_20240426.csv", header=True, inferSchema=True)
 file = file.filter(file.Identifier.isNotNull())
 
 file= file.withColumn('batch_date', lit(batch_id))\
@@ -65,11 +65,11 @@ contact_info_bronze = spark.sql(
     cast(Identifier as decimal(10)) Identifier,
     upper(Surname) Surname,
     upper(given_name) given_name,
-    upper(middle_initial) middle_initial,
+    middle_initial,
     suffix,
     Primary_street_number,
     primary_street_name,
-    city,
+    upper(city) city,
     state,
     zipcode,
     Primary_street_number_prev,
@@ -161,13 +161,27 @@ contact_info_silver.write.mode("overwrite") \
 # #load data to snowflake
 #
 
-# url = 'jdbc:snowflake://wbaiyzo-as58233.snowflakecomputing.com/?user=KATSREEN100&password=Dharmavaram1@&warehouse=COMPUTE_WH&db=ETL_AUTO&schema=CONTACT_INFO'
-# file.write.mode("overwrite") \
-#     .format("jdbc") \
-#     .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
-#     .option("url", url) \
-#     .option("dbtable", "ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW") \
-#     .save()
-#
-# spark.stop()
+url = 'jdbc:snowflake://wbaiyzo-as58233.snowflakecomputing.com/?user=KATSREEN100&password=Dharmavaram1@&warehouse=COMPUTE_WH&db=ETL_AUTO&schema=CONTACT_INFO'
+file.write.mode("overwrite") \
+    .format("jdbc") \
+    .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
+    .option("url", url) \
+    .option("dbtable", "ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW") \
+    .save()
+
+contact_info_bronze.write.mode("overwrite") \
+    .format("jdbc") \
+    .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
+    .option("url", url) \
+    .option("dbtable", "ETL_AUTO.CONTACT_INFO.CONTACT_INFO_BRONZE") \
+    .save()
+
+contact_info_silver.write.mode("overwrite") \
+    .format("jdbc") \
+    .option("driver", "net.snowflake.client.jdbc.SnowflakeDriver") \
+    .option("url", url) \
+    .option("dbtable", "ETL_AUTO.CONTACT_INFO.CONTACT_INFO_SILVER") \
+    .save()
+
+spark.stop()
 
