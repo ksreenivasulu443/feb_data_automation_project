@@ -1,26 +1,2 @@
 ,validation_Type,Source_name,target_name,Number_of_source_Records,Number_of_target_Records,Number_of_failed_Records,column,Status,source_type,target_type
-0,data_compare,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,75,75,0,IDENTIFIER,PASS,csv,table
-1,count_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,75,75,0,IDENTIFIER,PASS,csv,table
-2,schema_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,18,18,0,NOT APP,PASS,csv,table
-3,null_value_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,NOT APPL,75,0,Identifier,PASS,NOT APPL,table
-4,uniqueness_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,NOT APPL,75,0,Identifier,PASS,NOT APPL,table
-5,uniqueness_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,NOT APPL,75,6,Surname,FAIL,NOT APPL,table
-6,records_present_only_in_source,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,75,75,0,IDENTIFIER,PASS,csv,table
-7,records_present_only_target,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,75,75,0,IDENTIFIER,PASS,csv,table
-8,count_check,contact_info_bronze,contact_info_bronze,150,75,75,IDENTIFIER,FAIL,table,table
-9,schema_check,contact_info_bronze,contact_info_bronze,13,18,7,NOT APP,FAIL,table,table
-10,null_value_check,contact_info_bronze,contact_info_bronze,NOT APPL,75,0,Identifier,PASS,NOT APPL,table
-11,uniqueness_check,contact_info_bronze,contact_info_bronze,NOT APPL,75,0,Identifier,PASS,NOT APPL,table
-12,uniqueness_check,contact_info_bronze,contact_info_bronze,NOT APPL,75,6,Surname,FAIL,NOT APPL,table
-13,data_compare,contact_info_bronze,contact_info_silver,150,150,0,IDENTIFIER,PASS,table,table
-14,records_present_only_in_source,contact_info_bronze,contact_info_silver,150,150,0,IDENTIFIER,PASS,table,table
-15,records_present_only_target,contact_info_bronze,contact_info_silver,150,150,0,IDENTIFIER,PASS,table,table
-16,data_compare,contact_info_raw,contact_info_bronze,75,75,0,IDENTIFIER,PASS,table,table
-17,count_check,contact_info_raw,contact_info_bronze,75,75,0,IDENTIFIER,PASS,table,table
-18,schema_check,contact_info_raw,contact_info_bronze,18,18,0,NOT APP,PASS,table,table
-19,null_value_check,contact_info_raw,contact_info_bronze,NOT APPL,75,0,Identifier,PASS,NOT APPL,table
-20,uniqueness_check,contact_info_raw,contact_info_bronze,NOT APPL,75,0,Identifier,PASS,NOT APPL,table
-21,uniqueness_check,contact_info_raw,contact_info_bronze,NOT APPL,75,6,Surname,FAIL,NOT APPL,table
-22,records_present_only_in_source,contact_info_raw,contact_info_bronze,75,75,0,IDENTIFIER,PASS,table,table
-23,records_present_only_target,contact_info_raw,contact_info_bronze,75,75,0,IDENTIFIER,PASS,table,table
-24,count_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,75,75,0,IDENTIFIER,PASS,csv,snowflake
+0,count_check,customer_raw,customer_scd2,9,9,0,customer_id,PASS,table,table
