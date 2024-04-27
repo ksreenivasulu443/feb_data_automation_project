@@ -38,14 +38,14 @@ def flatten(df):
     return df
 given_path = os.path.abspath(os.path.dirname(__file__))
 def read_config(database):
-    parent_path = os.path.dirname(given_path) + '\Config\Config.json'
+    parent_path = os.path.dirname(given_path) + '/Config/Config.json'
     # Read the JSON configuration file
     with open(parent_path) as f:
         config = json.load(f)[database]
     return config
 
 def read_schema(schema_file_path):
-    path = os.path.dirname(given_path) + '\\schema\\' +schema_file_path
+    path = os.path.dirname(given_path) + '/schema/' +schema_file_path
     # Read the JSON configuration file
     print(path)
     with open(path, 'r') as schema_file:
