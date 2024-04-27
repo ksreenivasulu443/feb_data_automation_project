@@ -1,7 +1,8 @@
 import json
 
 from pyspark.sql import SparkSession
-from utility.general_utility import flatten
+from utility.general_utility import flatten, read_config, read_schema
+
 
 def read_file(type: str,
               path: str,
@@ -14,7 +15,12 @@ def read_file(type: str,
         type = type.lower()
         if type == 'csv':
             if schema != 'NOT APPL':
-                df = spark.read.schema(schema).csv(path)
+
+                schema_json = read_schema(schema)
+                print(schema_json)
+                print(path)
+                df = spark.read.schema(schema_json).option("header", True).option("delimiter", ",").csv(path)
+                df.show()
             else:
                 df = (spark.read.option("inferSchema", True).
                       option("header", True).option("delimiter", ",").csv(path))
@@ -52,9 +58,7 @@ def read_db(spark: SparkSession,
             query: str,
             row):
     try:
-        with open(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\config\Config.json") as f:
-            config_data = json.load(f)[database]
-            print(config_data)
+        config_data = read_config(database)
         if query != 'NOT APPL':
             with open(query, "r") as file:
                 sql_query = file.read()
@@ -91,9 +95,7 @@ def read_snowflake(spark: SparkSession,
             database: str,
             query: str, row):
     try:
-        with open(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\config\Config.json") as f:
-            config_data = json.load(f)[database]
-            print(config_data)
+        config_data = read_config(database)
         if query != 'NOT APPL':
             with open(query, "r") as file:
                 sql_query = file.read()

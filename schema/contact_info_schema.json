@@ -4,7 +4,7 @@
       "metadata": {},
       "name": "Identifier",
       "nullable": true,
-      "type": "int"
+      "type": "integer"
     },
     {
       "metadata": {},
@@ -58,7 +58,7 @@
       "metadata": {},
       "name": "zipcode",
       "nullable": true,
-      "type": "int"
+      "type": "integer"
     },
     {
       "metadata": {},

@@ -111,6 +111,9 @@ for row in validations:
                            spark=spark,
                            schema=row['target_schema_path'])
 
+    source.show()
+    target.show()
+
 
     for validation in row['validation_Type']:
         validation = validation.lower()
