@@ -1,9 +1,9 @@
 ,validation_Type,Source_name,target_name,Number_of_source_Records,Number_of_target_Records,Number_of_failed_Records,column,Status,source_type,target_type
-0,data_compare,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,75,1018,1093,IDENTIFIER,FAIL,csv,table
-1,count_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,75,1018,-943,IDENTIFIER,FAIL,csv,table
-2,schema_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,18,18,4,NOT APP,FAIL,csv,table
-3,null_value_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,NOT APPL,1018,0,Identifier,PASS,NOT APPL,table
-4,uniqueness_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,NOT APPL,1018,0,Identifier,PASS,NOT APPL,table
-5,uniqueness_check,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,NOT APPL,1018,216,Surname,FAIL,NOT APPL,table
-6,records_present_only_in_source,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,75,1018,75,IDENTIFIER,FAIL,csv,table
-7,records_present_only_target,C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240424.csv,contact_info_raw,75,1018,75,IDENTIFIER,FAIL,csv,table
+0,data_compare,contact_info_20240426.csv,contact_info_raw,1018,1018,512,IDENTIFIER,FAIL,csv,table
+1,count_check,contact_info_20240426.csv,contact_info_raw,1018,1018,0,IDENTIFIER,PASS,csv,table
+2,schema_check,contact_info_20240426.csv,contact_info_raw,18,18,4,NOT APP,FAIL,csv,table
+3,null_value_check,contact_info_20240426.csv,contact_info_raw,NOT APPL,1018,0,Identifier,PASS,NOT APPL,table
+4,uniqueness_check,contact_info_20240426.csv,contact_info_raw,NOT APPL,1018,0,Identifier,PASS,NOT APPL,table
+5,uniqueness_check,contact_info_20240426.csv,contact_info_raw,NOT APPL,1018,216,Surname,FAIL,NOT APPL,table
+6,records_present_only_in_source,contact_info_20240426.csv,contact_info_raw,1018,1018,0,IDENTIFIER,PASS,csv,table
+7,records_present_only_target,contact_info_20240426.csv,contact_info_raw,1018,1018,0,IDENTIFIER,PASS,csv,table

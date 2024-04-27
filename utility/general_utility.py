@@ -64,3 +64,13 @@ def fetch_transformation_query_path(file_path):
     with open(path, "r") as file:
         sql_query = file.read()
     return sql_query
+
+def fetch_transformation_query_path(file_path):
+    path = os.path.dirname(given_path) + '/Transformations_queries/' + file_path
+    with open(path, "r") as file:
+        sql_query = file.read()
+    return sql_query
+
+def fetch_file_path(file_path):
+    path = os.path.dirname(given_path) + '/source_files/'+file_path
+    return path

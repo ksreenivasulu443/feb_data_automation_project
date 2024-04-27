@@ -1,0 +1,4 @@
+customer_id,first_name,last_name,email,batch_date
+1,John,Doe,john.123@gamail.com,2024-03-01
+2,Jane,Smith,jane.smith@example.com,2024-03-01
+3,Michal,Johnson,michael.johnson@example.com,2024-03-01

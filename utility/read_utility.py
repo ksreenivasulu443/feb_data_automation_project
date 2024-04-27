@@ -1,7 +1,7 @@
 import json
 
 from pyspark.sql import SparkSession
-from utility.general_utility import flatten, read_config, read_schema
+from utility.general_utility import flatten, read_config, read_schema, fetch_transformation_query_path, fetch_file_path
 
 
 def read_file(type: str,
@@ -12,6 +12,7 @@ def read_file(type: str,
               multiline: bool = True,
               ):
     try:
+        path = fetch_file_path(path)
         type = type.lower()
         if type == 'csv':
             if schema != 'NOT APPL':
@@ -41,10 +42,8 @@ def read_file(type: str,
             pass
         else:
             raise ValueError("Unsupported file format", type)
-        words = row['exclude_columns'].split(',')
-        exclude_cols = ",".join(words)
-        #return df.drop('batch_date','create_date','update_date','create_user','update_user')
-        return df.drop(exclude_cols)
+        exclude_cols = row['exclude_columns'].split(',')
+        return df.drop(*exclude_cols)
     except FileNotFoundError as e:
         df = None
 
@@ -60,8 +59,7 @@ def read_db(spark: SparkSession,
     try:
         config_data = read_config(database)
         if query != 'NOT APPL':
-            with open(query, "r") as file:
-                sql_query = file.read()
+            sql_query = fetch_transformation_query_path(query)
             print(sql_query)
             print(config_data)
             df = spark.read.format("jdbc"). \
@@ -77,8 +75,10 @@ def read_db(spark: SparkSession,
                 option("password", config_data['password']). \
                 option("dbtable", table). \
                 option("driver", config_data['driver']).load()
+        exclude_cols = row['exclude_columns'].split(',')
 
-        return df.drop('batch_date','create_date','update_date','create_user','update_user')
+        # return df.drop('batch_date','create_date','update_date','create_user','update_user')
+        return df.drop(*exclude_cols)
 
     except FileNotFoundError as e:
         print(f"File not found: {e.filename}")
@@ -115,7 +115,8 @@ def read_snowflake(spark: SparkSession,
                 .option("dbtable", table) \
                 .load()
 
-        return  df.drop('batch_date','create_date','update_date','create_user','update_user')
+        exclude_cols = row['exclude_columns'].split(',')
+        return df.drop(*exclude_cols)
     except FileNotFoundError as e:
         print(f"File not found: {e.filename}")
         return None

@@ -133,6 +133,6 @@ negative_test_data = generate_negative_test_data(num_negative_records)
 combined_test_data = positive_test_data + negative_test_data
 
 # Save data to CSV file
-csv_filename = 'contact_info_20240426.csv'
+csv_filename = 'source_files/contact_info_20240426.csv'
 save_to_csv(combined_test_data, csv_filename)
 print(f"Test data saved to {csv_filename}")
