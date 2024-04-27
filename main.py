@@ -26,7 +26,7 @@ spark = SparkSession.builder.master("local[5]") \
     .getOrCreate()
 
 project_path = os.getcwd()
-template_path = project_path + '\config\Master_Test_Template.xlsx'
+template_path = project_path + '/config/Master_Test_Template.xlsx'
 test_cases = pd.read_excel(template_path)
 
 cwd = os.getcwd()
