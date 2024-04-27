@@ -38,7 +38,7 @@ def flatten(df):
     return df
 given_path = os.path.abspath(os.path.dirname(__file__))
 def read_config(database):
-    parent_path = os.path.dirname(given_path) + '/Config/Config.json'
+    parent_path = os.path.dirname(given_path) + '/config/Config.json'
     # Read the JSON configuration file
     with open(parent_path) as f:
         config = json.load(f)[database]
