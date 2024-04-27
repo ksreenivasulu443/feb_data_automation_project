@@ -145,7 +145,7 @@ summary = pd.DataFrame(Out)
 
 print(summary)
 
-summary.to_csv(r"C:\Users\A4952\PycharmProjects\feb_data_automation_project\execution_summary\summary.csv")
+summary.to_csv("summary.csv")
 # summary['bathc_id'] = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 schema = StructType([
     StructField("validation_Type", StringType(), True),
