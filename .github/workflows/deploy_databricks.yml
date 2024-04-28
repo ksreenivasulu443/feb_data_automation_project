@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABRICKS_HOST: your-databricks-host
+      DATABRICKS_HOST: 10.139.0.4
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
     steps:
