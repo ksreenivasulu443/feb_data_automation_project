@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABRICKS_HOST: adb-101134132288263.3.azuredatabricks.net
+      DATABRICKS_HOST: https://adb-101134132288263.3.azuredatabricks.net
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
     steps:
@@ -26,11 +26,21 @@ jobs:
 
     - name: Run Python script on Databricks
       run: |
-        # Authenticate with Databricks API
-        curl -X POST -H "Authorization: Bearer $DATABRICKS_TOKEN" \
-          -H "Content-Type: application/json" \
-          -d "{\"cluster_id\": \"0426-015410-z3v5q71h\", \"libraries\": [], \"notebook_task\": {\"notebook_path\": \"/Workspace/Users/etlbigdataautomation@gmail.com/hello\", \"base_parameters\": {\"batch_date\": \"${{ github.event.inputs.batch_date }}\", \"table\": \"${{ github.event.inputs.table }}\"}}}" \
-          https://$DATABRICKS_HOST/api/2.0/jobs/runs/submit
+       curl -X POST \
+        -H "Authorization: Bearer $DATABRICKS_TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{
+              "cluster_id": "0426-015410-z3v5q71h",
+              "libraries": [],
+              "notebook_task": {
+                "notebook_path": "/Workspace/Users/etlbigdataautomation@gmail.com/hello",
+                "base_parameters": {
+                  "batch_date": "'"${{ github.event.inputs.batch_date }}"'",
+                  "table": "'"${{ github.event.inputs.table }}"'"
+                }
+              }
+            }' \
+        https://$DATABRICKS_HOST/api/2.0/jobs/runs/submit
 
       env:
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
