@@ -1,0 +1,9 @@
+,validation_Type,Source_name,target_name,Number_of_source_Records,Number_of_target_Records,Number_of_failed_Records,column,Status,source_type,target_type
+0,data_compare,contact_info_20240426.csv,ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW,1018,1018,512,IDENTIFIER,FAIL,csv,snowflake
+1,count_check,contact_info_20240426.csv,ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW,1018,1018,0,IDENTIFIER,PASS,csv,snowflake
+2,schema_check,contact_info_20240426.csv,ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW,18,18,6,NOT APP,FAIL,csv,snowflake
+3,null_value_check,contact_info_20240426.csv,ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW,NOT APPL,1018,0,Identifier,PASS,NOT APPL,snowflake
+4,uniqueness_check,contact_info_20240426.csv,ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW,NOT APPL,1018,0,Identifier,PASS,NOT APPL,snowflake
+5,uniqueness_check,contact_info_20240426.csv,ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW,NOT APPL,1018,216,Surname,FAIL,NOT APPL,snowflake
+6,records_present_only_in_source,contact_info_20240426.csv,ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW,1018,1018,0,IDENTIFIER,PASS,csv,snowflake
+7,records_present_only_target,contact_info_20240426.csv,ETL_AUTO.CONTACT_INFO.CONTACT_INFO_RAW,1018,1018,0,IDENTIFIER,PASS,csv,snowflake
