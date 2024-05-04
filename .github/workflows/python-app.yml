@@ -1,9 +1,9 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Python application
+name: Python application #Name: This is the name of your workflow, which helps identify it within your repository.
 
-#on:
+#on: on: Specifies the events that trigger the workflow. For example, it could trigger on pushes to specific branches, pull requests, scheduled events, or manual triggers.
 #  push:
 #    branches: [ "master" ]
 #  pull_request:
@@ -28,27 +28,20 @@ on:
 
 permissions:
   contents: read
-
+#jobs: Defines the individual jobs that make up the workflow. Each job consists of one or more steps.
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
-    steps:
+    steps: #steps: Contains a sequence of tasks to be executed in the job. Each step typically represents a command or action to be performed.
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
         python-version: "3.11"
-#    - name: Build wheel and install
-#      run: |
-#        python -m pip install --user --upgrade build
-#        python -m build
-#        #pip install .
-#        find ./dist/*.whl | xargs pip install
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Execute dev file
+    - name: Execute automation code
       run: python main.py
