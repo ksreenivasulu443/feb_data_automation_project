@@ -8,6 +8,10 @@ table = os.getenv('TABLE')
 print("Batch Date:", batch_date)
 print("Table Name:", table)
 
+print("All Spark properties:")
+for prop in sc.getConf().getAll():
+    print(prop)
+
 
 
 

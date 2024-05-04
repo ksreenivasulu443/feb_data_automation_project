@@ -36,7 +36,7 @@ def generate_sales_data(num_records):
 sales_data = generate_sales_data(2000000)
 
 # Write data to CSV file
-csv_filename = r'/source_files/sales_data.csv'
+csv_filename = r'/test_data/sales_data.csv'
 with open(csv_filename, 'w', newline='') as csvfile:
     fieldnames = ['product', 'location', 'quantity', 'price', 'amount', 'date']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

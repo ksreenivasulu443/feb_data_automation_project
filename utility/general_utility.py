@@ -74,3 +74,5 @@ def fetch_transformation_query_path(file_path):
 def fetch_file_path(file_path):
     path = os.path.dirname(given_path) + '/source_files/'+file_path
     return path
+
+C:\Users\A4952\PycharmProjects\feb_data_automation_project\source_files\contact_info_20240423.csv
